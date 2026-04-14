@@ -82,8 +82,9 @@ INSERT INTO `classe` (`ID_CLASSE`, `ANNO`, `SEZIONE`, `INDIRIZZO`) VALUES
 (37, 1, 'C', 'Geometri'),
 (38, 3, 'C', 'Geometri');
 
-INSERT INTO Utente (EMAIL, NOME, COGNOME, RUOLO) VALUES
-('admin@scuola.edu',    'Admin',   'Sistema',  'admin'),
-('docente@scuola.edu',  'Mario',   'Rossi',    'docente'),
-('studente@scuola.edu', 'Luca',    'Bianchi',  'studente'),
-('ata@scuola.edu',      'Anna',    'Verdi',    'ata');
+INSERT INTO `utente` (`ID`, `EMAIL`, `NOME`, `COGNOME`, `RUOLO`) VALUES
+(1, 'damiano.necci@ittterni.org', 'Damiano', 'Necci', 'admin'),
+(2, 'federico.cini@ittterni.org', 'Federico', 'Cini', 'docente'),
+(3, 'simone.austeri@ittterni.org', 'Simone', 'Austeri', 'docente'),
+(4, 'andrea.mari@ittterni.org', 'Andrea', 'Mari', 'studente'),
+(5, 'tommaso.biscarini@ittterni.org', 'Tommaso', 'Biscarini', 'ata');

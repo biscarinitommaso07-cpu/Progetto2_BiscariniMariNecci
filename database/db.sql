@@ -47,3 +47,43 @@ CREATE TABLE Pren_Classe (
   FOREIGN KEY (ID_PRENOTAZIONE) REFERENCES Prenotazione(ID_PRENOTAZIONE) ON DELETE CASCADE,
   FOREIGN KEY (ID_CLASSE)       REFERENCES Classe(ID_CLASSE)             ON DELETE CASCADE
 );
+
+USE prenotazione_aule;
+
+INSERT INTO Aula (NUMERO_AULA, DESCRIZIONE, CAPIENZA) VALUES
+(1,  'Aula 1 - Piano 1 Ala Ovest', 30),
+(2,  'Aula 2 - Piano 1 Ala Ovest', 30),
+(3,  'Aula 3 - Piano 1 Ala Ovest', 30),
+(4,  'Aula 4 - Piano 1 Ala Ovest', 30),
+(5,  'Aula 5 - Piano 1 Ala Ovest', 30),
+(6,  'Aula 6 - Piano 1 Ala Ovest', 30),
+(7,  'Aula 7 - Piano 1 Ala Ovest', 30),
+(8,  'Aula 8 - Piano 1 Ala Ovest', 30),
+(9,  'Aula 9 - Piano 1 Ala Ovest', 30),
+(10, 'Aula 10 - Piano 1 Ala Ovest', 30);
+
+INSERT INTO `classe` (`ID_CLASSE`, `ANNO`, `SEZIONE`, `INDIRIZZO`) VALUES
+(21, 1, 'A', 'Informatica e Telecomunicazioni'),
+(22, 3, 'A', 'Informatica e Telecomunicazioni'),
+(23, 2, 'B', 'Elettronica ed Elettrotecnica'),
+(24, 4, 'B', 'Elettronica ed Elettrotecnica'),
+(25, 1, 'C', 'Meccanica, Meccatronica ed Energia'),
+(26, 3, 'C', 'Meccanica, Meccatronica ed Energia'),
+(27, 1, 'A', 'Informatica e Telecomunicazioni'),
+(28, 3, 'A', 'Informatica e Telecomunicazioni'),
+(29, 2, 'B', 'Elettronica ed Elettrotecnica'),
+(30, 4, 'B', 'Elettronica ed Elettrotecnica'),
+(31, 1, 'C', 'Meccanica, Meccatronica ed Energia'),
+(32, 3, 'C', 'Meccanica, Meccatronica ed Energia'),
+(33, 1, 'C', 'Chimica e Materiali'),
+(34, 3, 'C', 'Chimica e Materiali'),
+(35, 1, 'C', 'Logistica'),
+(36, 3, 'C', 'Logistica'),
+(37, 1, 'C', 'Geometri'),
+(38, 3, 'C', 'Geometri');
+
+INSERT INTO Utente (EMAIL, NOME, COGNOME, RUOLO) VALUES
+('admin@scuola.edu',    'Admin',   'Sistema',  'admin'),
+('docente@scuola.edu',  'Mario',   'Rossi',    'docente'),
+('studente@scuola.edu', 'Luca',    'Bianchi',  'studente'),
+('ata@scuola.edu',      'Anna',    'Verdi',    'ata');

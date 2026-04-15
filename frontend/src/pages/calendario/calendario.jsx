@@ -3,6 +3,8 @@ import dayGridPlugin  from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { useEffect, useState } from 'react';
 import { getPrenotazioni } from '../../api';
+import Navbar from '../navbar/Navbar';
+import './calendario.css';
 
 export default function Calendario() {
   const [eventi, setEventi] = useState([]);
@@ -11,24 +13,49 @@ export default function Calendario() {
     getPrenotazioni().then(({ data }) => {
       setEventi(data.map(p => ({
         id:    p.ID_PRENOTAZIONE,
-        title: `Aula ${p.NUMERO_AULA} — ${p.CLASSI}`,
+        title: `Room ${p.NUMERO_AULA} — ${p.CLASSI}`,
         start: `${p.DATA}T${p.ORA_INIZIO}`,
-        end:   `${p.DATA}T${p.ORA_FINE}`
+        end:   `${p.DATA}T${p.ORA_FINE}`,
+        backgroundColor: '#2563EB',
+        borderColor: '#1D4ED8',
+        textColor: '#fff',
       })));
     });
   }, []);
 
   return (
-    <FullCalendar
-      plugins={[dayGridPlugin, timeGridPlugin]}
-      initialView="timeGridWeek"
-      headerToolbar={{
-        left:   'prev,next today',
-        center: 'title',
-        right:  'dayGridMonth,timeGridWeek,timeGridDay'
-      }}
-      events={eventi}
-      locale="it"
-    />
+    <div className="cal-shell">
+      <Navbar />
+
+      <div className="cal-page">
+        <div className="cal-inner">
+          <div className="cal-header">
+            <div>
+              <h1 className="cal-title">Weekly Calendar</h1>
+              <p className="cal-subtitle">Overview of all classroom reservations</p>
+            </div>
+          </div>
+
+          <div className="cb-card cal-card">
+            <FullCalendar
+              plugins={[dayGridPlugin, timeGridPlugin]}
+              initialView="timeGridWeek"
+              headerToolbar={{
+                left:   'prev,next today',
+                center: 'title',
+                right:  'dayGridMonth,timeGridWeek,timeGridDay'
+              }}
+              events={eventi}
+              locale="en"
+              height="auto"
+              slotMinTime="07:00:00"
+              slotMaxTime="20:00:00"
+              allDaySlot={false}
+              nowIndicator={true}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

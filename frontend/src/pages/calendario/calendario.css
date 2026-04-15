@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+@import '../navbar/Navbar.css';
+
+.cal-shell {
+  min-height: 100vh;
+  background: var(--cb-bg);
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+.cal-page {
+  padding: 32px;
+}
+
+.cal-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.cal-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cb-text);
+  margin: 0 0 4px;
+}
+
+.cal-subtitle {
+  font-size: 14px;
+  color: var(--cb-muted);
+  margin: 0;
+}
+
+.cal-card {
+  padding: 24px;
+  overflow: hidden;
+}
+
+/* FullCalendar overrides to match our theme */
+.cal-card .fc {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+}
+
+.cal-card .fc-toolbar-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cb-text);
+}
+
+.cal-card .fc-button {
+  background: var(--cb-surface) !important;
+  border: 1px solid var(--cb-border) !important;
+  color: var(--cb-text) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border-radius: 7px !important;
+  box-shadow: var(--cb-shadow) !important;
+  padding: 5px 12px !important;
+}
+
+.cal-card .fc-button:hover {
+  background: var(--cb-bg) !important;
+}
+
+.cal-card .fc-button-active,
+.cal-card .fc-button:active {
+  background: var(--cb-primary-light) !important;
+  color: var(--cb-primary) !important;
+  border-color: var(--cb-primary) !important;
+}
+
+.cal-card .fc-today-button {
+  background: var(--cb-primary) !important;
+  color: #fff !important;
+  border-color: var(--cb-primary) !important;
+}
+
+.cal-card .fc-col-header-cell {
+  background: var(--cb-bg);
+  font-weight: 600;
+  color: var(--cb-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.cal-card .fc-timegrid-slot {
+  height: 42px !important;
+}
+
+.cal-card .fc-event {
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 2px 6px !important;
+}
+
+.cal-card .fc-daygrid-event {
+  border-radius: 5px !important;
+}
+
+.cal-card .fc-scrollgrid {
+  border-radius: 0 !important;
+  border-color: var(--cb-border) !important;
+}
+
+.cal-card .fc-scrollgrid td,
+.cal-card .fc-scrollgrid th {
+  border-color: var(--cb-border) !important;
+}
+
+.cal-card .fc-timegrid-now-indicator-line {
+  border-color: var(--cb-primary) !important;
+}

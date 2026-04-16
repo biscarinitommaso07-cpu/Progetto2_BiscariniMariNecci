@@ -38,6 +38,30 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /api/prenotazioni/all
+router.get('/all', async (req, res) => {
+  try {
+    const [rows] = await db.query(`
+      SELECT p.ID_PRENOTAZIONE, p.DATA, p.ORA_INIZIO, p.ORA_FINE, p.NOTE,
+             a.NUMERO_AULA, a.DESCRIZIONE,
+             u.NOME, u.COGNOME, u.EMAIL,
+             GROUP_CONCAT(CONCAT(c.ANNO, c.SEZIONE, ' ', c.INDIRIZZO)
+               ORDER BY c.ANNO SEPARATOR ', ') AS CLASSI
+      FROM prenotazione p
+      JOIN aula a         ON p.ID_AULA   = a.ID_AULA
+      JOIN utente u       ON p.ID_UTENTE = u.ID
+      LEFT JOIN Pren_Classe pc ON p.ID_PRENOTAZIONE = pc.ID_PRENOTAZIONE
+      LEFT JOIN classe c       ON pc.ID_CLASSE = c.ID_CLASSE
+      GROUP BY p.ID_PRENOTAZIONE 
+      ORDER BY p.DATA, p.ORA_INIZIO
+    `);
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Errore server' });
+  }
+});
+
 // GET /api/prenotazioni/:id
 router.get('/:id', async (req, res) => {
   try {

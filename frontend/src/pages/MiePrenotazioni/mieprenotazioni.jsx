@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getPrenotazioni, eliminaPrenotazione } from '../../api';
 import { useAuth } from '../../context/AuthContext';
+import Navbar from '../navbar/Navbar';
 import './mieprenotazioni.css';
 
 export default function MiePrenotazioni() {
@@ -46,6 +47,7 @@ export default function MiePrenotazioni() {
 
   return (
     <div className="mie-prenotazioni-container">
+      <Navbar />
       <header className="page-header">
         <h1>Le mie Prenotazioni</h1>
         <button onClick={() => navigate('/dashboard')} className="back-btn">← Torna alla Dashboard</button>

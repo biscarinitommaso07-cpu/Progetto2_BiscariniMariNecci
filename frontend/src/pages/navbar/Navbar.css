@@ -118,6 +118,10 @@
   flex-shrink: 0;
 }
 
+.cb-logout-btn {
+  margin-left: 16px;
+}
+
 /* ── Page shell ────────────────────────────────────────────────────── */
 .cb-page {
   min-height: calc(100vh - 58px);

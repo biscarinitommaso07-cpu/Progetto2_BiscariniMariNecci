@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import Navbar from '../navbar/Navbar';
 import './dashboard.css';
 
 export default function Dashboard() {
@@ -13,27 +14,9 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
+      <Navbar />
       <header className="dashboard-header">
-        <div className="header-content">
-          <h1>ClassBook</h1>
-          <div className="user-info">
-            <span>Ciao, {user?.nome} {user?.cognome}</span>
-            <button onClick={handleLogout} className="logout-btn">Esci</button>
-          </div>
-        </div>
       </header>
-
-      <nav className="dashboard-nav">
-        <button onClick={() => navigate('/calendario')} className="nav-btn">
-           Calendario
-        </button>
-        <button onClick={() => navigate('/nuova-prenotazione')} className="nav-btn">
-           Nuova Prenotazione
-        </button>
-        <button onClick={() => navigate('/mie-prenotazioni')} className="nav-btn">
-           Mie Prenotazioni
-        </button>
-      </nav>
 
       <main className="dashboard-main">
         <section className="welcome-section">

@@ -51,36 +51,59 @@ CREATE TABLE Pren_Classe (
 USE prenotazione_aule;
 
 INSERT INTO Aula (NUMERO_AULA, DESCRIZIONE, CAPIENZA) VALUES
-(1,  'Aula 1 - Piano 1 Ala Ovest', 30),
-(2,  'Aula 2 - Piano 1 Ala Ovest', 30),
-(3,  'Aula 3 - Piano 1 Ala Ovest', 30),
-(4,  'Aula 4 - Piano 1 Ala Ovest', 30),
-(5,  'Aula 5 - Piano 1 Ala Ovest', 30),
-(6,  'Aula 6 - Piano 1 Ala Ovest', 30),
-(7,  'Aula 7 - Piano 1 Ala Ovest', 30),
-(8,  'Aula 8 - Piano 1 Ala Ovest', 30),
-(9,  'Aula 9 - Piano 1 Ala Ovest', 30),
-(10, 'Aula 10 - Piano 1 Ala Ovest', 30);
+(1,  'Aula 1 - Piano 1 Ala Ovest', 28),
+(2,  'Aula 2 - Piano 1 Ala Est', 30),
+(3,  'Aula 3 - Piano Terra Corridoio Nord', 27),
+(4,  'Aula 4 - Piano Terra Corridoio Sud', 26),
+(5,  'Aula 5 - Piano 1 Ala Nord', 29),
+(6,  'Aula 6 - Piano 1 Ala Sud', 30),
+(7,  'Aula 7 - Piano 2 Ala Ovest', 28),
+(8,  'Aula 8 - Piano 2 Ala Est', 31),
+(9,  'Aula 9 - Piano 2 Corridoio Centrale', 27),
+(10, 'Aula 10 - Piano 1 Ala Ovest', 30),
+(11, 'Aula 11 - Piano Terra Ala Est', 25),
+(12, 'Aula 12 - Piano Terra Ala Ovest', 26),
+(13, 'Aula 13 - Piano 1 Corridoio Centrale', 28),
+(14, 'Laboratorio Informatica - Piano 2', 30),
+(43, 'Laboratorio Informatica - Piano 2', 25),
+(53, 'Laboratorio Informatica - Piano 1', 35),
+(56, 'Laboratorio Informatica e Sistemi e Reti - Piano 1', 40),
+(15, 'Aula 15 - Piano 2 Ala Nord', 30),
+(16, 'Aula 16 - Piano 2 Ala Sud', 29),
+(17, 'Aula 17 - Piano 1 Ala Est', 27),
+(18, 'Aula 18 - Piano Terra Corridoio Sud', 26),
+(19, 'Aula 19 - Piano 1 Ala Ovest', 28),
+(20, 'Aula 20 - Piano 2 Corridoio Centrale', 31);
 
-INSERT INTO `classe` (`ID_CLASSE`, `ANNO`, `SEZIONE`, `INDIRIZZO`) VALUES
-(21, 1, 'A', 'Informatica e Telecomunicazioni'),
-(22, 3, 'A', 'Informatica e Telecomunicazioni'),
-(23, 2, 'B', 'Elettronica ed Elettrotecnica'),
-(24, 4, 'B', 'Elettronica ed Elettrotecnica'),
-(25, 1, 'C', 'Meccanica, Meccatronica ed Energia'),
-(26, 3, 'C', 'Meccanica, Meccatronica ed Energia'),
-(27, 1, 'A', 'Informatica e Telecomunicazioni'),
-(28, 3, 'A', 'Informatica e Telecomunicazioni'),
-(29, 2, 'B', 'Elettronica ed Elettrotecnica'),
-(30, 4, 'B', 'Elettronica ed Elettrotecnica'),
-(31, 1, 'C', 'Meccanica, Meccatronica ed Energia'),
-(32, 3, 'C', 'Meccanica, Meccatronica ed Energia'),
-(33, 1, 'C', 'Chimica e Materiali'),
-(34, 3, 'C', 'Chimica e Materiali'),
-(35, 1, 'C', 'Logistica'),
-(36, 3, 'C', 'Logistica'),
-(37, 1, 'C', 'Geometri'),
-(38, 3, 'C', 'Geometri');
+INSERT INTO `classe` (`ANNO`, `SEZIONE`, `INDIRIZZO`) VALUES
+-- Informatica e Telecomunicazioni
+(1, 'AIT', 'Informatica e Telecomunicazioni'),
+(2, 'BIT', 'Informatica e Telecomunicazioni'),
+(3, 'AIA', 'Informatica e Telecomunicazioni'),
+(5, 'BIA', 'Informatica e Telecomunicazioni'),
+
+-- Elettronica ed Elettrotecnica
+(1, 'AEE', 'Elettronica ed Elettrotecnica'),
+(2, 'CEE', 'Elettronica ed Elettrotecnica'),
+(3, 'BET', 'Elettronica ed Elettrotecnica'),
+(5, 'AEC', 'Elettronica ed Elettrotecnica'),
+
+-- Meccanica, Meccatronica ed Energia
+(1, 'BMM', 'Meccanica, Meccatronica ed Energia'),
+(2, 'AMM', 'Meccanica, Meccatronica ed Energia'),
+(3, 'CMM', 'Meccanica, Meccatronica ed Energia'),
+(4, 'DMM', 'Meccanica, Meccatronica ed Energia'),
+
+-- Chimica e Materiali
+(1, 'CCM', 'Chimica e Materiali'),
+(2, 'BCM', 'Chimica e Materiali'),
+(3, 'ABS', 'Chimica e Materiali'),
+(5, 'CBS', 'Chimica e Materiali'),
+-- Geometri
+(1, 'BAE', 'Geometri'),
+(2, 'AAE', 'Geometri'),
+(3, 'CCA', 'Geometri'),
+(4, 'ACA', 'Geometri');
 
 INSERT INTO `utente` (`ID`, `EMAIL`, `NOME`, `COGNOME`, `RUOLO`) VALUES
 (1, 'damiano.necci@ittterni.org', 'Damiano', 'Necci', 'admin'),

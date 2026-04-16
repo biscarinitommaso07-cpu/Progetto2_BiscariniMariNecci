@@ -1,105 +1,76 @@
-import { useEffect, useState } from 'react';
-import { getPrenotazioni } from '../../api';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './dashboard.css';
 
 export default function Dashboard() {
-  const [prenotazioni, setPrenotazioni] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  // Formattazione data come da mockup: "Thursday, April 2, 2026"
-  const oggi = new Date().toLocaleDateString('en-US', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
-
-  useEffect(() => {
-    getPrenotazioni()
-      .then(({ data }) => setPrenotazioni(data))
-      .catch((err) => console.error("Errore caricamento:", err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const todayISO = new Date().toISOString().split('T')[0];
-  const prenotazioniOggi = prenotazioni.filter(p => p.data === todayISO);
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <div>
-          <h1 className="dashboard-title">Dashboard</h1>
-          <p className="dashboard-date">{oggi}</p>
+        <div className="header-content">
+          <h1>ClassBook</h1>
+          <div className="user-info">
+            <span>Ciao, {user?.nome} {user?.cognome}</span>
+            <button onClick={handleLogout} className="logout-btn">Esci</button>
+          </div>
         </div>
       </header>
 
-      {/* Sezione Statistiche (Card) */}
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-icon blue-bg">📅</div>
-          <div className="stat-content">
-            <p className="stat-label">Today's Bookings</p>
-            <h2 className="stat-value">{prenotazioniOggi.length}</h2>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon light-blue-bg">🏢</div>
-          <div className="stat-content">
-            <p className="stat-label">Rooms Available</p>
-            <h2 className="stat-value">{119 - prenotazioniOggi.length}</h2>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon cyan-bg">🕒</div>
-          <div className="stat-content">
-            <p className="stat-label">Total Bookings</p>
-            <h2 className="stat-value">{prenotazioni.length}</h2>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon gray-bg">👤</div>
-          <div className="stat-content">
-            <p className="stat-label">Classes Today</p>
-            <h2 className="stat-value">5</h2> {/* Dato d'esempio mockup */}
-          </div>
-        </div>
-      </div>
+      <nav className="dashboard-nav">
+        <button onClick={() => navigate('/calendario')} className="nav-btn">
+           Calendario
+        </button>
+        <button onClick={() => navigate('/nuova-prenotazione')} className="nav-btn">
+           Nuova Prenotazione
+        </button>
+        <button onClick={() => navigate('/mie-prenotazioni')} className="nav-btn">
+           Mie Prenotazioni
+        </button>
+      </nav>
 
-      {/* Tabella Prenotazioni Odierne */}
-      <section className="table-section">
-        <h3 className="section-title">Today's Bookings</h3>
-        <p className="section-subtitle">All classroom reservations scheduled for today</p>
-        
-        <div className="table-wrapper">
-          <table className="booking-table">
-            <thead>
-              <tr>
-                <th>Room</th>
-                <th>Time</th>
-                <th>Classes</th>
-                <th>Booked By</th>
-              </tr>
-            </thead>
-            <tbody>
-              {prenotazioniOggi.length > 0 ? (
-                prenotazioniOggi.map((p) => (
-                  <tr key={p.id}>
-                    <td className="font-bold">Room {p.aula.numero}</td>
-                    <td>{p.ora_inizio} - {p.ora_fine}</td>
-                    <td>
-                      {p.classi.map(c => (
-                        <span key={c.id} className="badge-class">{c.anno}{c.sezione} {c.indirizzo.substring(0,4)}</span>
-                      ))}
-                    </td>
-                    <td className="text-muted">{p.utente.email}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="4" className="text-center">No bookings for today.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <main className="dashboard-main">
+        <section className="welcome-section">
+          <h2>Benvenuto in ClassBook</h2>
+          <p>Sistema di prenotazione aule scolastiche</p>
+          
+          <div className="info-grid">
+            <div className="info-card">
+              <h3>Calendario</h3>
+              <p>Visualizza tutte le prenotazioni di aule</p>
+              <button onClick={() => navigate('/calendario')}>Vai al Calendario</button>
+            </div>
+
+            <div className="info-card">
+              <h3>Nuova Prenotazione</h3>
+              <p>Prenota un'aula per le tue esigenze</p>
+              <button onClick={() => navigate('/nuova-prenotazione')}>Crea Prenotazione</button>
+            </div>
+
+            <div className="info-card">
+              <h3>Mie Prenotazioni</h3>
+              <p>Gestisci le tue prenotazioni</p>
+              <button onClick={() => navigate('/mie-prenotazioni')}>Vedi Prenotazioni</button>
+            </div>
+          </div>
+        </section>
+
+        <section className="user-section">
+          <h2>Informazioni Profilo</h2>
+          <div className="profile-info">
+            <p><strong>Nome:</strong> {user?.nome}</p>
+            <p><strong>Cognome:</strong> {user?.cognome}</p>
+            <p><strong>Email:</strong> {user?.email}</p>
+            <p><strong>Ruolo:</strong> {user?.ruolo}</p>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

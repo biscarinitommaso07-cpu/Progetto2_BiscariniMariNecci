@@ -35,8 +35,7 @@ router.post('/google', async (req, res) => {
     console.log(`[AUTH] Utente trovato: ${utente.NOME} ${utente.COGNOME}`);
 
     const token = jwt.sign(
-      { id: utente.ID, email: utente.EMAIL, ruolo: utente.RUOLO,
-        nome: utente.NOME, cognome: utente.COGNOME },
+      { id: utente.ID, email: utente.EMAIL, ruolo: utente.RUOLO },
       process.env.JWT_SECRET,
       { expiresIn: '8h' }
     );
@@ -48,10 +47,3 @@ router.post('/google', async (req, res) => {
     res.status(500).json({ error: 'Errore autenticazione: ' + err.message });
   }
 });
-
-// GET /auth/me
-router.get('/me', authMiddleware, (req, res) => {
-  res.json(req.user);
-});
-
-module.exports = router;

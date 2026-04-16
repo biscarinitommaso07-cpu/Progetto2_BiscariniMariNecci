@@ -20,9 +20,3 @@ app.get('/health', (req, res) => {
 app.use('/auth',            require('./routes/auth'));
 app.use('/api/prenotazioni', require('./routes/prenotazioni'));
 app.use('/api/aule',         require('./routes/aule'));
-app.use('/api/classi',       require('./routes/classi'));
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () =>
-  console.log(`Server attivo su http://localhost:${PORT}`)
-);

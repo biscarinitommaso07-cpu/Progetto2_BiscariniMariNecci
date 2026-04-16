@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getPrenotazioni, eliminaPrenotazione } from '../../api';
-import { useAuth } from '../../context/AuthContext';
 import Navbar from '../navbar/Navbar';
 import './mieprenotazioni.css';
 
 export default function MiePrenotazioni() {
   const [prenotazioni, setPrenotazioni] = useState([]);
   const [filtro, setFiltro] = useState('');
-  const { user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,9 +16,7 @@ export default function MiePrenotazioni() {
   const caricaPrenotazioni = async () => {
     try {
       const { data } = await getPrenotazioni();
-      // Filtra solo le prenotazioni dell'utente corrente
-      const miePrenotazioni = data.filter(p => p.ID_UTENTE === user?.id);
-      setPrenotazioni(miePrenotazioni);
+      setPrenotazioni(data); // ← il backend filtra già per utente loggato
     } catch (err) {
       console.error('Errore nel caricamento prenotazioni:', err);
       alert('Errore nel caricamento delle prenotazioni');
@@ -32,7 +28,6 @@ export default function MiePrenotazioni() {
       try {
         await eliminaPrenotazione(id);
         setPrenotazioni(prenotazioni.filter(p => p.ID_PRENOTAZIONE !== id));
-        alert('Prenotazione eliminata con successo');
       } catch (err) {
         alert(err.response?.data?.error || 'Errore nell\'eliminazione');
       }
@@ -79,13 +74,11 @@ export default function MiePrenotazioni() {
                   <h3>Aula {p.NUMERO_AULA}</h3>
                   <span className="data-badge">{p.DATA}</span>
                 </div>
-                
                 <div className="card-body">
                   <p><strong>Orario:</strong> {p.ORA_INIZIO} - {p.ORA_FINE}</p>
                   <p><strong>Classi:</strong> {p.CLASSI}</p>
                   {p.NOTE && <p><strong>Note:</strong> {p.NOTE}</p>}
                 </div>
-                
                 <div className="card-footer">
                   <button
                     onClick={() => handleElimina(p.ID_PRENOTAZIONE)}

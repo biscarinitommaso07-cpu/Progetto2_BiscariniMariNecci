@@ -20,9 +20,9 @@ router.get('/', async (req, res) => {
       JOIN utente u       ON p.ID_UTENTE = u.ID
       LEFT JOIN Pren_Classe pc ON p.ID_PRENOTAZIONE = pc.ID_PRENOTAZIONE
       LEFT JOIN classe c       ON pc.ID_CLASSE = c.ID_CLASSE
-      WHERE 1=1
+      WHERE p.ID_UTENTE = ?
     `;
-    const params = [];
+    const params = [req.user.id]; // ← filtra per utente loggato
 
     if (data)   { query += ' AND p.DATA = ?';        params.push(data); }
     if (aula)   { query += ' AND a.NUMERO_AULA = ?'; params.push(aula); }
@@ -68,7 +68,6 @@ router.post('/', requireRole('docente', 'ata', 'admin'), async (req, res) => {
   try {
     await conn.beginTransaction();
 
-    // Controllo sovrapposizioni
     const [conflitti] = await conn.query(
       `SELECT ID_PRENOTAZIONE FROM prenotazione
        WHERE ID_AULA = ?
@@ -83,7 +82,6 @@ router.post('/', requireRole('docente', 'ata', 'admin'), async (req, res) => {
       return res.status(409).json({ error: 'Aula già prenotata in questa fascia oraria' });
     }
 
-    // Inserimento prenotazione
     const [result] = await conn.query(
       `INSERT INTO prenotazione (ID_AULA, ID_UTENTE, DATA, ORA_INIZIO, ORA_FINE, NOTE)
        VALUES (?, ?, ?, ?, ?, ?)`,
@@ -91,7 +89,6 @@ router.post('/', requireRole('docente', 'ata', 'admin'), async (req, res) => {
     );
     const idPrenotazione = result.insertId;
 
-    // Inserimento classi collegate
     for (const idClasse of classi) {
       await conn.query(
         'INSERT INTO Pren_Classe (ID_PRENOTAZIONE, ID_CLASSE) VALUES (?, ?)',

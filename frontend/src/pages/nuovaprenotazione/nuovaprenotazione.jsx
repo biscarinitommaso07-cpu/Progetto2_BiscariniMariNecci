@@ -60,16 +60,16 @@ export default function NuovaPrenotazione() {
           {/* Header */}
           <div className="np-header">
             <div>
-              <h1 className="np-title">New Booking</h1>
-              <p className="np-subtitle">Reserve a classroom for your class</p>
+              <h1 className="np-title">Nuova Prenotazione</h1>
+              <p className="np-subtitle">Prenota un'aula per la tua classe</p>
             </div>
           </div>
 
           {/* Form card */}
           <div className="cb-card np-card">
             <div className="np-form-header">
-              <p className="np-form-title">Booking Details</p>
-              <p className="np-form-sub">Fill in the information below to reserve a classroom</p>
+              <p className="np-form-title">Dettagli Prenotazione</p>
+              <p className="np-form-sub">Compila le informazioni di seguito per prenotare un'aula</p>
             </div>
 
             {errore && (
@@ -86,16 +86,16 @@ export default function NuovaPrenotazione() {
             <div className="np-fields">
               {/* Room */}
               <div className="np-field">
-                <label className="np-label">Room Number</label>
+                <label className="np-label">Numero Aula</label>
                 <select
                   className="np-select"
                   value={form.id_aula}
                   onChange={e => setForm({...form, id_aula: e.target.value})}
                 >
-                  <option value="">Select a room (1-119)</option>
+                  <option value="">Seleziona un'aula (1-119)</option>
                   {aule.map(a => (
                     <option key={a.ID_AULA} value={a.ID_AULA}>
-                      Room {a.NUMERO_AULA}
+                      Aula {a.NUMERO_AULA}
                     </option>
                   ))}
                 </select>
@@ -103,7 +103,7 @@ export default function NuovaPrenotazione() {
 
               {/* Date */}
               <div className="np-field">
-                <label className="np-label">Date</label>
+                <label className="np-label">Data</label>
                 <div className="np-input-icon">
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#94A3B8" strokeWidth="2">
                     <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -123,24 +123,24 @@ export default function NuovaPrenotazione() {
               {/* Time row */}
               <div className="np-field np-field-row">
                 <div className="np-field-half">
-                  <label className="np-label">Start Time</label>
+                  <label className="np-label">Ora Inizio</label>
                   <select
                     className="np-select"
                     value={form.ora_inizio}
                     onChange={e => setForm({...form, ora_inizio: e.target.value})}
                   >
-                    <option value="">Select start time</option>
+                    <option value="">Seleziona ora inizio</option>
                     {TIME_SLOTS.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </div>
                 <div className="np-field-half">
-                  <label className="np-label">End Time</label>
+                  <label className="np-label">Ora Fine</label>
                   <select
                     className="np-select"
                     value={form.ora_fine}
                     onChange={e => setForm({...form, ora_fine: e.target.value})}
                   >
-                    <option value="">Select end time</option>
+                    <option value="">Seleziona ora fine</option>
                     {TIME_SLOTS.filter(t => t > form.ora_inizio).map(t => (
                       <option key={t} value={t}>{t}</option>
                     ))}
@@ -150,11 +150,11 @@ export default function NuovaPrenotazione() {
 
               {/* Classes */}
               <div className="np-field">
-                <label className="np-label">Classes Involved</label>
+                <label className="np-label">Classi Coinvolte</label>
                 <input
                   type="text"
                   className="np-input"
-                  placeholder="Search and select classes..."
+                  placeholder="Cerca e seleziona classi..."
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                 />
@@ -180,7 +180,7 @@ export default function NuovaPrenotazione() {
                 {search && (
                   <div className="np-dropdown">
                     {classiFiltered.length === 0 ? (
-                      <p className="np-dropdown-empty">No classes found</p>
+                      <p className="np-dropdown-empty">Nessuna classe trovata</p>
                     ) : classiFiltered.map(c => (
                       <label key={c.ID_CLASSE} className="np-dropdown-item">
                         <input
@@ -199,14 +199,14 @@ export default function NuovaPrenotazione() {
             {/* Actions */}
             <div className="np-actions">
               <button className="cb-btn" onClick={() => navigate('/dashboard')}>
-                Cancel
+                Annulla
               </button>
               <button
                 className="cb-btn cb-btn-primary"
                 onClick={handleSubmit}
                 disabled={!isValid}
               >
-                Create Booking
+                Crea Prenotazione
               </button>
             </div>
           </div>

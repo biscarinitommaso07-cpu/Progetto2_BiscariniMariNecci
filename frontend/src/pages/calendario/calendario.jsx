@@ -13,7 +13,7 @@ export default function Calendario() {
     getPrenotazioni().then(({ data }) => {
       setEventi(data.map(p => ({
         id:    p.ID_PRENOTAZIONE,
-        title: `Room ${p.NUMERO_AULA} — ${p.CLASSI}`,
+        title: `Aula ${p.NUMERO_AULA} — ${p.CLASSI}`,
         start: `${p.DATA}T${p.ORA_INIZIO}`,
         end:   `${p.DATA}T${p.ORA_FINE}`,
         backgroundColor: '#2563EB',
@@ -31,8 +31,8 @@ export default function Calendario() {
         <div className="cal-inner">
           <div className="cal-header">
             <div>
-              <h1 className="cal-title">Weekly Calendar</h1>
-              <p className="cal-subtitle">Overview of all classroom reservations</p>
+              <h1 className="cal-title">Calendario Settimanale</h1>
+              <p className="cal-subtitle">Panoramica di tutte le prenotazioni d'aula</p>
             </div>
           </div>
 
@@ -46,7 +46,7 @@ export default function Calendario() {
                 right:  'dayGridMonth,timeGridWeek,timeGridDay'
               }}
               events={eventi}
-              locale="en"
+              locale="it"
               height="auto"
               slotMinTime="07:00:00"
               slotMaxTime="20:00:00"

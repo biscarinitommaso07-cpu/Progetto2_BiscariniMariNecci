@@ -1,85 +1,92 @@
+/* Container principale */
 .login-container {
   min-height: 100vh;
-  background-color: #f8f9fc; /* Sfondo chiaro come da mockup */
+  background-color: #f8f9fc;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 20px;
 }
 
+/* Titolo ClassBook fuori dalla card */
+.login-container h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #202124;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+/* Sottotitolo fuori dalla card */
+.login-container p {
+  color: #5f6368;
+  font-size: 1rem;
+  margin: 0 0 2.5rem 0;
+}
+
+/* La Card bianca */
 .login-card {
   background: white;
-  padding: 2.5rem;
+  padding: 3rem 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   width: 100%;
   max-width: 400px;
   text-align: center;
-}
-
-.login-logo-circle {
-  background-color: #1a73e8;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
 }
 
-.login-logo-text {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #202124;
-  margin: 0;
-}
-
-.login-tagline {
-  color: #5f6368;
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
-}
-
-.login-title {
+/* Messaggio di benvenuto dentro la card */
+.login-card::before {
+  content: "Bentornato";
+  display: block;
   font-size: 1.5rem;
+  font-weight: 600;
   color: #202124;
   margin-bottom: 0.5rem;
 }
 
-.login-subtitle {
-  color: #5f6368;
+/* Testo descrittivo dentro la card (prima del bottone) */
+.login-card > p::before {
+  content: "Accedi con il tuo account scolastico per gestire le prenotazioni delle aule";
+  display: block;
   font-size: 0.95rem;
-  margin-bottom: 2rem;
-  line-height: 1.4;
-}
-
-.login-divider {
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0;
-}
-
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background: #e8eaed;
-}
-
-.divider-text {
-  padding: 0 10px;
-  font-size: 0.75rem;
-  color: #bdc1c6;
-  font-weight: 600;
-}
-
-.login-footer-text {
-  font-size: 0.85rem;
   color: #5f6368;
+  line-height: 1.5;
+  margin-bottom: 2rem;
 }
 
-.login-support {
+/* Wrapper per il componente GoogleLogin */
+.google-login {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Divider e info account scolastico */
+.login-card::after {
+  content: "SOLO ACCOUNT SCOLASTICI \A Utilizza il tuo indirizzo email @school.edu per accedere al sistema.";
+  white-space: pre-wrap;
+  display: block;
   margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: #70757a;
+  line-height: 1.6;
+  border-top: 1px solid #e8eaed;
+  padding-top: 1.5rem;
+}
+
+/* Link di supporto in fondo alla pagina (fuori dalla card) */
+.login-container::after {
+  content: "Serve aiuto? Contatta il Supporto IT";
+  margin-top: 2rem;
   font-size: 0.85rem;
   color: #1a73e8;
+  cursor: pointer;
+  font-weight: 500;
 }

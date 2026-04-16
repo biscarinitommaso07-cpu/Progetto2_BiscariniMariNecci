@@ -20,3 +20,8 @@ app.get('/health', (req, res) => {
 app.use('/auth',            require('./routes/auth'));
 app.use('/api/prenotazioni', require('./routes/prenotazioni'));
 app.use('/api/aule',         require('./routes/aule'));
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
